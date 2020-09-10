@@ -4,6 +4,7 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="style-001.css">
     <title>Receiver demo</title>
 	<script>
@@ -16,6 +17,8 @@
 		if (animation == 'animateIn') {
 			document.getElementById('bauchbinde-hintergrund').hidden = false;
 			document.getElementById('untertitel').hidden = false;
+			document.getElementById('box').hidden = false;
+			document.getElementById('box2').hidden = false;
 			document.getElementById('haupttext').classList.remove("animateOut");
 			document.getElementById('haupttext').classList.add("animateIn");
 			document.getElementById("lower-third").classList.remove("animateOut");
@@ -24,6 +27,8 @@
 		if (animation == 'animateOut') {
 			document.getElementById('bauchbinde-hintergrund').hidden = true;
 			document.getElementById('untertitel').hidden = true;
+			document.getElementById('box').hidden = true;
+			document.getElementById('box2').hidden = true;
 			document.getElementById('haupttext').classList.remove("animateIn");
 			document.getElementById('haupttext').classList.add("animateOut");
 			document.getElementById("lower-third").classList.remove("animateIn");
