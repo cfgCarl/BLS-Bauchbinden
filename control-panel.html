@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Lower thirds control panel</title>
-	<link rel="stylesheet" href="../common/css/style-001.css">
-	<script src="../common/js/jquery.js"></script>
+	<link rel="stylesheet" href="style-001.css">
+	<script src="jquery.js"></script>
   </head>
   <body class="lower-thirds-panel panel">
 	<div class="static-panel-top">
@@ -69,16 +69,19 @@
 		cur_inhalt = "";
 		cur_ut = "";
 		$("#schaltbar tr td button ").click(function(){
-			if($(this).id == "untertitel") {
+			if(this.id == "untertitel") {
 				cur_ut=$(this).parent().parent().find("td").find("div").text();
 				if(cur_ut == "") {cur_ut=$(this).parent().parent().find("td").find("input").val();}
 				function_send();
+			} else {
+				cur_inhalt = $(this).parent().parent().find("td").find("div").text();
+				if (cur_inhalt == "") {
+					cur_inhalt = $(this).parent().parent().find("td").find("input").val();
+				}
+				function_send();
+				//alert(cur_inhalt)
+				//$("#lower-thirds-name:text").val(cur_inhalt);
 			}
-		cur_inhalt=$(this).parent().parent().find("td").find("div").text();
-		if(cur_inhalt == "") {cur_inhalt=$(this).parent().parent().find("td").find("input").val();}
-		function_send();
-		//alert(cur_inhalt)
-			//$("#lower-thirds-name:text").val(cur_inhalt);
 		});
 		var bc = new BroadcastChannel('obs-lower-thirds-channel');
 		function function_send() {
@@ -87,6 +90,8 @@
 			bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateIn'); /* send */
 		};
 		function function_hide() {
+			cur_ut="";
+			cur_inhalt="";
 			bc.postMessage('||animateOut'); /* send - only last parameter*/
 		}
 	</script>
