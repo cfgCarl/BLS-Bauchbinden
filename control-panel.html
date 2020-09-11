@@ -10,8 +10,8 @@
   </head>
   <body class="lower-thirds-panel panel">
 	<div class="static-panel-top">
-		<input id="lower-thirds-name" placeholder="Spontantext">
-		<button class="onethird" id="sender" onclick="function_send()">zeigen</button>
+		<input id="spontaneingabe" class = "inhalt" placeholder="Spontantext">
+		<button class="onethird" id="spontan" onclick="function_send()">zeigen</button>
 		<button class="onethird" id="sender" onclick="function_hide(false)">alles ausblenden</button>
 
 		   <div style="clear:both"></div>
@@ -40,7 +40,7 @@
 			</tr>
 			<tr class="zeile">
 				<td class="listText">
-					<input class="inhalt" placeholder="Textstelle" value=""></input>
+					<input class="inhalt" id="sender" placeholder="Textstelle" value=""></input>
 				</td>
 				<td class="listButtons">
 					<button class="halbButton" id="untertitelzg" onclick="function_send()">zeigen</button>
@@ -87,6 +87,10 @@
 				//$("#lower-thirds-name:text").val(cur_inhalt);
 			}
 		});
+		$("#spontan ").click(function(){
+			cur_inhalt = $("#spontaneingabe").val();
+			function_send();
+		})
 		var bc = new BroadcastChannel('obs-lower-thirds-channel');
 		function function_send() {
 			inhalt_to_send = cur_inhalt;
