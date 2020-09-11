@@ -11,29 +11,37 @@
 		var bc = new BroadcastChannel('obs-lower-thirds-channel');
 		bc.onmessage = function (ev) {
 			received_data=ev.data.split("|");
+			htext = received_data[0]
+			utext = received_data[1]
+			animation = received_data[2];
+		if (animation == 'animateIn' && htext.length > 0) {
+			document.getElementById("poCVJM").classList.add("bbBildOnDisplayDreieck")
 			document.getElementById("haupttext").innerHTML = received_data[0];
 			document.getElementById("untertitel").innerHTML = received_data[1];
-			animation = received_data[2];
-		if (animation == 'animateIn' && document.getElementById("haupttext").innerHTML.length > 0) {
-			document.getElementById('bauchbinde-hintergrund').hidden = false;
-			document.getElementById('untertitel').hidden = false;
-			document.getElementById('box').hidden = false;
-			document.getElementById('box2').hidden = false;
-			document.getElementById('haupttext').hidden =false;
-			document.getElementById("lower-third").classList.remove("animateOut");
-			document.getElementById("lower-third").classList.add("animateIn");
+			setTimeout(function () {
+				document.getElementById("pCVJM").classList.add("bbTransitionOpaFull")
+				document.getElementById("untertitel").classList.add("bbTransitionOpaFull")
+				document.getElementById("box").classList.add("bbTransitionOpaFull")
+				document.getElementById("box2").classList.add("bbTransitionOpaFull")
+				document.getElementById("haupttext").classList.add("bbTransitionOpaFull")
+			}, 3000)
 		};
 			if (animation == 'animateOut') {
-				document.getElementById('bauchbinde-hintergrund').hidden = true;
-				document.getElementById('untertitel').hidden = true;
-				document.getElementById('box').hidden = true;
-				document.getElementById('box2').hidden = true;
-				document.getElementById('haupttext').hidden =true;
-				document.getElementById("lower-third").classList.remove("animateIn");
-				document.getElementById("lower-third").classList.add("animateOut");
+				document.getElementById("pCVJM").classList.remove("bbTransitionOpaFull")
+				document.getElementById("untertitel").classList.remove("bbTransitionOpaFull")
+				document.getElementById("box").classList.remove("bbTransitionOpaFull")
+				document.getElementById("box2").classList.remove("bbTransitionOpaFull")
+				document.getElementById("haupttext").classList.remove("bbTransitionOpaFull")
+				setTimeout(function () {
+					document.getElementById("poCVJM").classList.remove("bbBildOnDisplayDreieck")
+					document.getElementById("haupttext").innerHTML = received_data[0];
+					document.getElementById("untertitel").innerHTML = received_data[1];
+				}, 1000)
 			};
 			if (animation == 'animateUTOut') {
-				document.getElementById('untertitel').hidden = true;
+				document.getElementById("untertitel").classList.remove("bbTransitionOpaFull")
+				document.getElementById("haupttext").innerHTML = received_data[0];
+				document.getElementById("untertitel").innerHTML = received_data[1];
 			};
 
 		}
@@ -41,17 +49,18 @@
   </head>
   <body class="browser-source lower-thirds">
 	<div id="lower-third">
-    	<div id="bauchbinde-hintergrund" class="bauchbinde-hintergrund" hidden>
-			<img src="Bauchbinde_transparent.png">
+    	<div id="bauchbinde-hintergrund" class="bauchbinde-hintergrund">
+			<img src="bb_oCVJM.png" id="poCVJM" class="bbBildDreieck" style="z-index: 3; position: absolute" >
+			<img src="bb_CVJM.png" id="pCVJM" class="bbTransitionOpa" style="z-index: 4; position: absolute">
 			</div>
-		<div id="haupttext" class="bb-Haupttext grosserText" hidden>
+		<div id="haupttext" class="bb-Haupttext grosserText bbTransitionOpa">
 
 		</div>
-		<div id="untertitel" class="bb-Untertitel kleinerText" hidden>
+		<div id="untertitel" class="bb-Untertitel kleinerText bbTransitionOpa">
 
 		</div>
-		<div id="box" class="box" hidden></div>
-		<div id="box2" class="box2" hidden></div>
+		<div id="box" class="box bbTransitionOpa"></div>
+		<div id="box2" class="box2 bbTransitionOpa"></div>
 			<!---<div class="right-block">
 				<div id="name">Testname</div>
 				<div id="function"></div>
