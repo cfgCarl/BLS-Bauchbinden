@@ -12,7 +12,7 @@
 	<div class="static-panel-top">
 		<input id="lower-thirds-name" placeholder="Spontantext">
 		<button class="onethird" id="sender" onclick="function_send()">zeigen</button>
-		<button class="onethird" id="sender" onclick="function_hide()">alles ausblenden</button>
+		<button class="onethird" id="sender" onclick="function_hide(false)">alles ausblenden</button>
 
 		   <div style="clear:both"></div>
 		   
@@ -20,14 +20,14 @@
 </div>
 	</div>
 	<div class="panel-bottom">
-		<h3>Bauchbinden</h3>
+		<h3>BLS-Bauchbinden</h3>
 		<table id="schaltbar">
 			<tr class="zeile">
 				<td class="listText">
 					<input class="inhalt" placeholder="Mod & Prediger" value=""></input>
 				</td>
 				<td class="listButtons">
-					<button class="zeigen" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
 				</td>
 			</tr>
 			<tr class="zeile">
@@ -35,7 +35,7 @@
 					<input class="inhalt" placeholder="Telefonnummer" value="0151 428 55055"></input>
 				</td>
 				<td class="listButtons">
-					<button class="zeigen" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
 				</td>
 			</tr>
 			<tr class="zeile">
@@ -43,37 +43,41 @@
 					<input class="inhalt" placeholder="Textstelle" value=""></input>
 				</td>
 				<td class="listButtons">
-					<button class="zeigen" id="untertitel" onclick="function_send()">zeigen</button>
+					<button class="halbButton" id="untertitelzg" onclick="function_send()">zeigen</button>
+					<button class="halbButton" id="untertitelvb" onclick="function_hide(true)">ausblenden</button>
 				</td>
 			</tr>
 			<tr class="zeile">
 				<td class="listText">
-					<div class="inhalt">Der Bibeltext und Du</input>
+					<div class="fixText">Der Bibeltext und Du</input>
 				</td>
 				<td class="listButtons">
-					<button class="zeigen" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
 				</td>
 			</tr>
 			<tr class="zeile">
 				<td class="listText">
-					<div class="inhalt">Der Bibeltext und Ihr</input>
+					<div class="fixText">Der Bibeltext und Ihr</input>
 				</td>
 				<td class="listButtons">
-					<button class="zeigen" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
 				</td>
 			</tr>
 		</table>
 	<div>
+
+		<div id="version">BLS-Bauchbinden, v1.0</div>
 	
 	<script>
 		cur_inhalt = "";
 		cur_ut = "";
 		$("#schaltbar tr td button ").click(function(){
-			if(this.id == "untertitel") {
+			if(this.id == "untertitelzg") {
 				cur_ut=$(this).parent().parent().find("td").find("div").text();
 				if(cur_ut == "") {cur_ut=$(this).parent().parent().find("td").find("input").val();}
 				function_send();
-			} else {
+			} else if(this.id == "untertitelvb") { /*nothing*/ }
+			else {
 				cur_inhalt = $(this).parent().parent().find("td").find("div").text();
 				if (cur_inhalt == "") {
 					cur_inhalt = $(this).parent().parent().find("td").find("input").val();
@@ -89,10 +93,16 @@
 			ut_to_send = cur_ut;
 			bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateIn'); /* send */
 		};
-		function function_hide() {
-			cur_ut="";
-			cur_inhalt="";
-			bc.postMessage('||animateOut'); /* send - only last parameter*/
+		function function_hide(ut) {
+			if(ut) {
+				cur_ut="";
+				ut_to_send = cur_ut;
+				bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|animateUTOut'); /* send - only last parameter*/
+			} else {
+				cur_ut="";
+				cur_inhalt="";
+				bc.postMessage('||animateOut'); /* send - only last parameter*/
+			}
 		}
 	</script>
 	

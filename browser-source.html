@@ -14,43 +14,44 @@
 			document.getElementById("haupttext").innerHTML = received_data[0];
 			document.getElementById("untertitel").innerHTML = received_data[1];
 			animation = received_data[2];
-		if (animation == 'animateIn') {
+		if (animation == 'animateIn' && document.getElementById("haupttext").innerHTML.length > 0) {
 			document.getElementById('bauchbinde-hintergrund').hidden = false;
 			document.getElementById('untertitel').hidden = false;
 			document.getElementById('box').hidden = false;
 			document.getElementById('box2').hidden = false;
-			document.getElementById('haupttext').classList.remove("animateOut");
-			document.getElementById('haupttext').classList.add("animateIn");
+			document.getElementById('haupttext').hidden =false;
 			document.getElementById("lower-third").classList.remove("animateOut");
 			document.getElementById("lower-third").classList.add("animateIn");
 		};
-		if (animation == 'animateOut') {
-			document.getElementById('bauchbinde-hintergrund').hidden = true;
-			document.getElementById('untertitel').hidden = true;
-			document.getElementById('box').hidden = true;
-			document.getElementById('box2').hidden = true;
-			document.getElementById('haupttext').classList.remove("animateIn");
-			document.getElementById('haupttext').classList.add("animateOut");
-			document.getElementById("lower-third").classList.remove("animateIn");
-			document.getElementById("lower-third").classList.add("animateOut");
-		};
+			if (animation == 'animateOut') {
+				document.getElementById('bauchbinde-hintergrund').hidden = true;
+				document.getElementById('untertitel').hidden = true;
+				document.getElementById('box').hidden = true;
+				document.getElementById('box2').hidden = true;
+				document.getElementById('haupttext').hidden =true;
+				document.getElementById("lower-third").classList.remove("animateIn");
+				document.getElementById("lower-third").classList.add("animateOut");
+			};
+			if (animation == 'animateUTOut') {
+				document.getElementById('untertitel').hidden = true;
+			};
 
 		}
 	</script>
   </head>
   <body class="browser-source lower-thirds">
 	<div id="lower-third">
-    	<div id="bauchbinde-hintergrund" class="bauchbinde-hintergrund">
+    	<div id="bauchbinde-hintergrund" class="bauchbinde-hintergrund" hidden>
 			<img src="Bauchbinde_transparent.png">
 			</div>
-		<div id="haupttext" class="bb-Haupttext grosserText">
-			Testtext
+		<div id="haupttext" class="bb-Haupttext grosserText" hidden>
+
 		</div>
-		<div id="untertitel" class="bb-Untertitel kleinerText">
-			untertitel
+		<div id="untertitel" class="bb-Untertitel kleinerText" hidden>
+
 		</div>
-		<div id="box" class="box"></div>
-		<div id="box2" class="box2"></div>
+		<div id="box" class="box" hidden></div>
+		<div id="box2" class="box2" hidden></div>
 			<!---<div class="right-block">
 				<div id="name">Testname</div>
 				<div id="function"></div>
