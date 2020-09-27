@@ -83,7 +83,7 @@
 
 		</div>
 
-		<div id="version">BLS-Bauchbinden, v1.2</div>
+		<div id="version">BLS-Bauchbinden, v1.2.1</div>
 	
 	<script>
 		cur_inhalt = "";
@@ -110,8 +110,6 @@
 		})
 		var bc = new BroadcastChannel('obs-lower-thirds-channel');
 		function function_send(ut) {
-			inhalt_to_send = cur_inhalt;
-			ut_to_send = cur_ut;
 			if(ut) {
 				var test = document.getElementById("UtTest");
 				test.innerHTML = cur_ut;
@@ -119,16 +117,22 @@
 				if(width > 613) {
 					alert("Untertitel zu lang!")
 				} else {
-					bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateUtIn'); /* send */
+					if(cur_ut.length > 0) {
+						ut_to_send = cur_ut;
+						bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateUtIn'); /* send */
+					}
 				}
 			} else {
 				var test = document.getElementById("Test");
 				test.innerHTML = cur_inhalt;
 				var width = test.clientWidth + 1;
-				if(width > 635) {
+				if(width > 635 ) {
 					alert("Text zu lang!")
 				} else {
-					bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateIn'); /* send */
+					if(cur_inhalt.length > 0) {
+						inhalt_to_send = cur_inhalt;
+						bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateIn'); /* send */
+					}
 				}
 			}
 		};
