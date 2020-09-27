@@ -52,7 +52,6 @@ body.browser-source.clock{
 	background: var(--obs-button-background);
 	border: 1px solid var(--obs-button-border);
 	color: var(--obs-button-color);
-	padding:.75em;
 	text-align:center;
 }
 
@@ -264,15 +263,27 @@ body.browser-source.clock{
 	color: white;
 }
 
-.halbButton{
+.drittelButton{
 	height: 25px;
 	margin: 1%;
 	line-height: 0px;
-	width: 47%;
+	width: calc((100% / 3) - (6% / 3) - 3px);
 	font-size: 1em;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	color: white;
+	padding: 0;
+	white-space: nowrap;
+}
+
+.darkButton{
+	background-color: var(--obs-button-border) !important;
+	border-color: var(--obs-button-background) !important;
+}
+
+.darkButton:hover{
+	background: var(--obs-button-background) !important;
+	border-color: var(--obs-button-border) !important;
 }
 
 		#version{
