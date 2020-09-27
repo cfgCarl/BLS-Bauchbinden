@@ -11,7 +11,7 @@
   <body class="lower-thirds-panel panel">
 	<div class="static-panel-top">
 		<input id="spontaneingabe" class = "inhalt" placeholder="Spontantext">
-		<button class="onethird" id="spontan" onclick="function_send()">zeigen</button>
+		<button class="onethird" id="spontan" onclick="">zeigen</button>
 		<button class="onethird" id="sender" onclick="function_hide(false)">alles ausblenden</button>
 
 		   <div style="clear:both"></div>
@@ -27,7 +27,7 @@
 					<input class="inhalt" placeholder="Mod & Prediger" value=""></input>
 				</td>
 				<td class="listButtons">
-					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="">zeigen</button>
 				</td>
 			</tr>
 			<tr class="zeile">
@@ -35,7 +35,7 @@
 					<input class="inhalt" placeholder="Telefonnummer" value="0151 428 55055"></input>
 				</td>
 				<td class="listButtons">
-					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="">zeigen</button>
 				</td>
 			</tr>
 			<tr class="zeile">
@@ -43,7 +43,7 @@
 					<input class="inhalt" id="sender" placeholder="Textstelle" value=""></input>
 				</td>
 				<td class="listButtons">
-					<button class="halbButton" id="untertitelzg" onclick="function_send()">zeigen</button>
+					<button class="halbButton" id="untertitelzg" onclick="">zeigen</button>
 					<button class="halbButton" id="untertitelvb" onclick="function_hide(true)">ausblenden</button>
 				</td>
 			</tr>
@@ -52,7 +52,7 @@
 					<div class="fixText">Der Bibeltext und Du</input>
 				</td>
 				<td class="listButtons">
-					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="">zeigen</button>
 				</td>
 			</tr>
 			<tr class="zeile">
@@ -60,7 +60,7 @@
 					<div class="fixText">Der Bibeltext und Ihr</input>
 				</td>
 				<td class="listButtons">
-					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="">zeigen</button>
 				</td>
 			</tr>
 			<tr class="zeile">
@@ -68,7 +68,7 @@
 					<div class="fixText">Fragen und Statements</input>
 				</td>
 				<td class="listButtons">
-					<button class="breitButton" id="sender" onclick="function_send()">zeigen</button>
+					<button class="breitButton" id="sender" onclick="">zeigen</button>
 				</td>
 			</tr>
 		</table>
@@ -83,27 +83,31 @@
 			if(this.id == "untertitelzg") {
 				cur_ut=$(this).parent().parent().find("td").find("div").text();
 				if(cur_ut == "") {cur_ut=$(this).parent().parent().find("td").find("input").val();}
-				function_send();
+				function_send(true);
 			} else if(this.id == "untertitelvb") { /*nothing*/ }
 			else {
 				cur_inhalt = $(this).parent().parent().find("td").find("div").text();
 				if (cur_inhalt == "") {
 					cur_inhalt = $(this).parent().parent().find("td").find("input").val();
 				}
-				function_send();
+				function_send(false);
 				//alert(cur_inhalt)
 				//$("#lower-thirds-name:text").val(cur_inhalt);
 			}
 		});
 		$("#spontan ").click(function(){
 			cur_inhalt = $("#spontaneingabe").val();
-			function_send();
+			function_send(false);
 		})
 		var bc = new BroadcastChannel('obs-lower-thirds-channel');
-		function function_send() {
+		function function_send(ut) {
 			inhalt_to_send = cur_inhalt;
 			ut_to_send = cur_ut;
-			bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateIn'); /* send */
+			if(ut) {
+				bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateUtIn'); /* send */
+			} else {
+				bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateIn'); /* send */
+			}
 		};
 		function function_hide(ut) {
 			if(ut) {

@@ -16,32 +16,32 @@
 			animation = received_data[2];
 		if (animation == 'animateIn' && htext.length > 0) {
 			document.getElementById("poCVJM").classList.add("bbBildOnDisplayDreieck")
-			document.getElementById("haupttext").innerHTML = received_data[0];
-			document.getElementById("untertitel").innerHTML = received_data[1];
 			setTimeout(function () {
+				document.getElementById("haupttext").innerHTML = received_data[0];
+				document.getElementById("untertitel").innerHTML = received_data[1];
 				document.getElementById("pCVJM").classList.add("bbTransitionOpaFull")
-				document.getElementById("untertitel").classList.add("bbTransitionOpaFull")
 				document.getElementById("box").classList.add("bbTransitionOpaFull")
 				document.getElementById("box2").classList.add("bbTransitionOpaFull")
 				document.getElementById("haupttext").classList.add("bbTransitionOpaFull")
+				document.getElementById("untertitel").classList.add("bbTransitionOpaFull")
 			}, 3000)
-		};
-			if (animation == 'animateOut') {
+		} else if(animation == 'animateUtIn') {
+			document.getElementById("haupttext").innerHTML = received_data[0];
+			document.getElementById("untertitel").innerHTML = received_data[1];
+			document.getElementById("untertitel").classList.add("bbTransitionOpaFull")
+		} else if (animation == 'animateOut') {
 				document.getElementById("pCVJM").classList.remove("bbTransitionOpaFull")
 				document.getElementById("untertitel").classList.remove("bbTransitionOpaFull")
 				document.getElementById("box").classList.remove("bbTransitionOpaFull")
 				document.getElementById("box2").classList.remove("bbTransitionOpaFull")
 				document.getElementById("haupttext").classList.remove("bbTransitionOpaFull")
 				setTimeout(function () {
-					document.getElementById("poCVJM").classList.remove("bbBildOnDisplayDreieck")
 					document.getElementById("haupttext").innerHTML = received_data[0];
 					document.getElementById("untertitel").innerHTML = received_data[1];
+					document.getElementById("poCVJM").classList.remove("bbBildOnDisplayDreieck")
 				}, 1000)
-			};
-			if (animation == 'animateUTOut') {
+			} else if (animation == 'animateUTOut') {
 				document.getElementById("untertitel").classList.remove("bbTransitionOpaFull")
-				document.getElementById("haupttext").innerHTML = received_data[0];
-				document.getElementById("untertitel").innerHTML = received_data[1];
 			};
 
 		}
