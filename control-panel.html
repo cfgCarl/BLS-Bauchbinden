@@ -73,6 +73,12 @@
 			</tr>
 		</table>
 	<div>
+		<div id="Test">
+
+		</div>
+		<div id="UtTest">
+
+		</div>
 
 		<div id="version">BLS-Bauchbinden, v1.1</div>
 	
@@ -104,9 +110,23 @@
 			inhalt_to_send = cur_inhalt;
 			ut_to_send = cur_ut;
 			if(ut) {
-				bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateUtIn'); /* send */
+				var test = document.getElementById("UtTest");
+				test.innerHTML = cur_ut;
+				var width = test.clientWidth + 1;
+				if(width > 613) {
+					alert("Untertitel zu lang!")
+				} else {
+					bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateUtIn'); /* send */
+				}
 			} else {
-				bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateIn'); /* send */
+				var test = document.getElementById("Test");
+				test.innerHTML = cur_inhalt;
+				var width = test.clientWidth + 1;
+				if(width > 635) {
+					alert("Text zu lang!")
+				} else {
+					bc.postMessage(inhalt_to_send + '|' + ut_to_send + '|' + 'animateIn'); /* send */
+				}
 			}
 		};
 		function function_hide(ut) {

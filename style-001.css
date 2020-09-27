@@ -230,6 +230,29 @@ body.browser-source.clock{
 			width: 95%;
 		}
 
+#Test {
+	position: absolute;
+	visibility: hidden;
+	height: auto;
+	width: auto;
+	white-space: nowrap;
+	font-size: 4em;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 600;
+	text-decoration-line: underline;
+	text-decoration-style: dotted;
+}
+#UtTest {
+	position: absolute;
+	visibility: hidden;
+	height: auto;
+	width: auto;
+	white-space: nowrap;
+	font-size: 2em;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+}
+
 .breitButton{
 	height: 25px;
 	margin: 1%;

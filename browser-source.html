@@ -16,9 +16,9 @@
 			animation = received_data[2];
 		if (animation == 'animateIn' && htext.length > 0) {
 			document.getElementById("poCVJM").classList.add("bbBildOnDisplayDreieck")
+			document.getElementById("haupttext").innerHTML = received_data[0];
+			document.getElementById("untertitel").innerHTML = received_data[1];
 			setTimeout(function () {
-				document.getElementById("haupttext").innerHTML = received_data[0];
-				document.getElementById("untertitel").innerHTML = received_data[1];
 				document.getElementById("pCVJM").classList.add("bbTransitionOpaFull")
 				document.getElementById("box").classList.add("bbTransitionOpaFull")
 				document.getElementById("box2").classList.add("bbTransitionOpaFull")
