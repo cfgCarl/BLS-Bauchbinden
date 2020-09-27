@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style-001.css">
+    <title>Receiver demo</title>
+	<script>
+		function x() {
+			setTimeout(function () {
+				document.getElementById("weitereTermin1").classList.remove("bbTransitionOpaFull")
+				document.getElementById("weitereTermin2").classList.add("bbTransitionOpaFull")
+				document.getElementById("westbund").classList.remove("bbTransitionOpaFull")
+				document.getElementById("württemberg").classList.remove("bbTransitionOpaFull")
+				document.getElementById("bayern").classList.add("bbTransitionOpaFull")
+				document.getElementById("baden").classList.add("bbTransitionOpaFull")
+				setTimeout(function () {
+					document.getElementById("weitereTermin2").classList.remove("bbTransitionOpaFull")
+					document.getElementById("weitereTermin3").classList.add("bbTransitionOpaFull")
+					document.getElementById("westbund").classList.add("bbTransitionOpaFull")
+					document.getElementById("württemberg").classList.add("bbTransitionOpaFull")
+					document.getElementById("bayern").classList.remove("bbTransitionOpaFull")
+					document.getElementById("baden").classList.remove("bbTransitionOpaFull")
+					setTimeout(function () {
+						document.getElementById("weitereTermin3").classList.remove("bbTransitionOpaFull")
+						document.getElementById("weitereTermin1").classList.add("bbTransitionOpaFull")
+						document.getElementById("westbund").classList.remove("bbTransitionOpaFull")
+						document.getElementById("württemberg").classList.remove("bbTransitionOpaFull")
+						document.getElementById("bayern").classList.add("bbTransitionOpaFull")
+						document.getElementById("baden").classList.add("bbTransitionOpaFull")
+						setTimeout(function () {
+							document.getElementById("weitereTermin1").classList.remove("bbTransitionOpaFull")
+							document.getElementById("weitereTermin2").classList.add("bbTransitionOpaFull")
+							document.getElementById("westbund").classList.add("bbTransitionOpaFull")
+							document.getElementById("württemberg").classList.add("bbTransitionOpaFull")
+							document.getElementById("bayern").classList.remove("bbTransitionOpaFull")
+							document.getElementById("baden").classList.remove("bbTransitionOpaFull")
+							setTimeout(function () {
+								document.getElementById("weitereTermin2").classList.remove("bbTransitionOpaFull")
+								document.getElementById("weitereTermin3").classList.add("bbTransitionOpaFull")
+								document.getElementById("westbund").classList.remove("bbTransitionOpaFull")
+								document.getElementById("württemberg").classList.remove("bbTransitionOpaFull")
+								document.getElementById("bayern").classList.add("bbTransitionOpaFull")
+								document.getElementById("baden").classList.add("bbTransitionOpaFull")
+								setTimeout(function () {
+									document.getElementById("weitereTermin3").classList.remove("bbTransitionOpaFull")
+									document.getElementById("weitereTermin1").classList.add("bbTransitionOpaFull")
+									document.getElementById("westbund").classList.add("bbTransitionOpaFull")
+									document.getElementById("württemberg").classList.add("bbTransitionOpaFull")
+									document.getElementById("bayern").classList.remove("bbTransitionOpaFull")
+									document.getElementById("baden").classList.remove("bbTransitionOpaFull")
+									x();
+								}, 3000)
+							}, 3000)
+						}, 3000)
+					}, 3000)
+				}, 3000);
+			}, 3000);
+		}
+		x();
+	</script>
+  </head>
+  <body class="abspann-background">
+	<div id="fragen-div">
+		Ich habe ganz viele Fragen:
+		<br>
+		<br>
+		1. Frage
+		<br>
+		<br>
+
+		2. Frage
+		<br>
+		<br>
+
+		3. eine gaaaaaaaaaaaaaaaaaanz ganz wirklich sehr sehr sehr wirklich sehr sehr sehr wirklich sehr sehr sehr wirklich sehr sehr sehr wirklich sehr sehr sehr sehr lange lange toll wichtige Frage!
+	</div>
+	<div id="lower-abspann">
+	<div id="bls-next-Termine">
+		<div class="bls-Termine-head">Nächster Termine:</div>
+		<div class="bls-Termine-termin">06.10.</div>
+	</div>
+	<div id="bls-over-Termine">
+		<div class="bls-Termine-head">Weitere Termine:</div>
+		<div class="bls-Termine-termin bbTransitionOpa bbTransitionOpaFull" id="weitereTermin1">20.10.</div>
+		<div class="bls-Termine-termin bbTransitionOpa" id="weitereTermin2">03.11.</div>
+		<div class="bls-Termine-termin bbTransitionOpa" id="weitereTermin3">17.11.</div>
+	</div>
+	<div id="bls-cvjm-logos">
+		<img src="cvjmwestbund.png" id="westbund" class="bls-cvjm-logo bbTransitionOpa bbTransitionOpaFull">
+		<img src="Logo_CVJM-Württemberg.jpg" id="württemberg" class="bls-cvjm-logo bbTransitionOpa bbTransitionOpaFull">
+		<img src="cvjmbayern.png" id="bayern" class="bls-cvjm-logo bbTransitionOpa">
+		<img src="cvjmbaden.png" id="baden" class="bls-cvjm-logo bbTransitionOpa">
+	</div>
+	<img src="bibellifestreamLogo.png" id="bls-Logo">
+		<div class="heuteMit">Heute mit:</div>
+		<marquee class="heuteMitAbspann">Referent: Simon, Moderation: Anki, Fragen: Kerstin & Nicole, Technik: Jonny & Philipp & Carl</marquee>
+	</div>
+  </body>
+</html>
