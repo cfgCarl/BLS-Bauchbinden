@@ -383,13 +383,34 @@ body.browser-source.clock{
 
 #fragen-div{
 	height: 60%;
-	width: 94%;
+	left: 0;
+	width: 60%;
 	margin: 2%;
 	padding: 1%;
 	border: white 3px solid;
 	border-radius: 10px;
 	color: white;
 	font-size: 3em;
+	position: absolute;
+}
+
+#ankuendigungen-div{
+	right: 0;
+	height: 60%;
+	width: 30%;
+	margin: 2%;
+	margin-left: 0;
+	padding: 1%;
+	border: white 3px solid;
+	border-radius: 10px;
+	color: white;
+	font-size: 2.2em;
+	position: absolute;
+	text-align: center;
+}
+
+.textstelle{
+	font-size: 2.5em;
 }
 
 #lower-abspann{
@@ -400,6 +421,7 @@ body.browser-source.clock{
 	padding: 0;
 	background-color: white;
 	position: absolute;
+	bottom: 0;
 }
 
 #bls-Logo{
