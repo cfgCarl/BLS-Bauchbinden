@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../scripts/style-001.css">
+    <title>Receiver demo</title>
+	<script>
+
+
+		function startup() {
+
+			var x = new XMLHttpRequest()
+			var url = '/abruf';
+			x.open("GET", url, true);
+			x.onload = function (e) {
+				if (x.readyState === 4) {
+					if (x.status === 200) {
+						var data = JSON.parse(x.responseText);
+						document.getElementById("ref").innerHTML = data.Referent;
+						document.getElementById("mod").innerHTML = data.Moderation;
+						document.getElementById("frag").innerHTML = data.FragenPersonen;
+						document.getElementById("tec").innerHTML = data.TechnikPersonen;
+						//document.getElementById("zusPers").value = data.ZusatzPersonen;
+						//document.getElementById("text").value = data.BibelstelleAktuell;
+						document.getElementById("textNext").innerHTML = data.BibelstelleNext;
+						document.getElementById("date1").innerHTML = data.date1.substring(8,10) + "." + data.date1.substring(5,7);
+						document.getElementById("date2").innerHTML = data.date2.substring(8,10) + "." + data.date2.substring(5,7);
+						document.getElementById("date3").innerHTML = data.date3.substring(8,10) + "." + data.date3.substring(5,7);
+						document.getElementById("date4").innerHTML = data.date4.substring(8,10) + "." + data.date4.substring(5,7);
+						document.getElementById("fragen").innerHTML = data.Fragen;
+					} else {
+						console.error(x.statusText);
+					}
+				}
+			};
+			x.onerror = function (e) {
+				console.error(x.statusText);
+			};
+			x.send();
+		}
+
+		function x() {
+			setTimeout(function () {
+				document.getElementById("date2").classList.remove("bbTransitionOpaFull")
+				document.getElementById("date3").classList.add("bbTransitionOpaFull")
+				setTimeout(function () {
+					document.getElementById("date3").classList.remove("bbTransitionOpaFull")
+					document.getElementById("date4").classList.add("bbTransitionOpaFull")
+					setTimeout(function () {
+						document.getElementById("date4").classList.remove("bbTransitionOpaFull")
+						document.getElementById("date2").classList.add("bbTransitionOpaFull")
+						x();
+					}, 3000)
+				}, 3000);
+			}, 3000);
+		}
+
+		function y() {
+			setTimeout(function () {
+				document.getElementById("westbund").classList.remove("bbTransitionOpaFull")
+				document.getElementById("württemberg").classList.add("bbTransitionOpaFull")
+				setTimeout(function () {
+					document.getElementById("württemberg").classList.remove("bbTransitionOpaFull")
+					document.getElementById("bayern").classList.add("bbTransitionOpaFull")
+					setTimeout(function () {
+						document.getElementById("bayern").classList.remove("bbTransitionOpaFull")
+						document.getElementById("baden").classList.add("bbTransitionOpaFull")
+						setTimeout(function () {
+							document.getElementById("baden").classList.remove("bbTransitionOpaFull")
+							document.getElementById("westbund").classList.add("bbTransitionOpaFull")
+							y();
+						}, 3000);
+					}, 3000);
+				}, 3000);
+			}, 3000);
+		}
+		startup();
+		x();
+		y();
+	</script>
+  </head>
+  <body class="abspann-background">
+	<div id="fragen" class="fragen-div">
+
+	</div>
+	<div id="ankuendigungen-div"></br>
+		Nächstes Mal lesen wir:</br><span class="textNext" id="textNext">1. Mose 1, 1-99</span></br>
+		Du kannst nicht live dabei sein? </br> Dann lese gerne schon vorab den Text und sende uns deine Fragen auf WhatsApp an 015142855055 um auch teil des Streams zu sein.
+	</div>
+	<div id="lower-abspann">
+	<div id="bls-next-Termine">
+		<div class="bls-Termine-head">Nächster Termin:</div>
+		<div id="date1" class = "bls-Termine-termin"></div>
+	</div>
+	<div id="bls-over-Termine">
+		<div class="bls-Termine-head">Weitere Termine:</div>
+		<div class="bls-Termine-termin bbTransitionOpa bbTransitionOpaFull" id="date2">20.10.</div>
+		<div class="bls-Termine-termin bbTransitionOpa" id="date3">03.11.</div>
+		<div class="bls-Termine-termin bbTransitionOpa" id="date4">17.11.</div>
+	</div>
+	<div id="bls-cvjm-logos">
+		<div class="bls-Termine-head">Präsentiert von:</div>
+		<img src="../Images/cvjmwestbund.png" id="westbund" class="bls-cvjm-logo-up bbTransitionOpa bbTransitionOpaFull">
+		<img src="../Images/cvjmwuerttemberg.png" id="württemberg" class="bls-cvjm-logo-up bbTransitionOpa">
+		<img src="../Images/cvjmbayern.png" id="bayern" class="bls-cvjm-logo-up bbTransitionOpa">
+		<img src="../Images/cvjmbaden.png" id="baden" class="bls-cvjm-logo-up bbTransitionOpa">
+	</div>
+
+	<img src="../Images/bibellifestreamLogo.png" id="bls-Logo">
+		<div class="heuteMit">Heute mit:</div>
+		<marquee class="heuteMitAbspann">Referent: <span id="ref">hey</span>, Moderation: <span id="mod"></span>, Fragen: <span id="frag"></span>, Technik: <span id="tec"></span></marquee>
+	</div>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<BLS>
+    <personen>
+        <ref>heyhey</ref>
+		<mod></mod>
+		<frag></frag>
+		<tec>low</tec>
+		<zusPers></zusPers>
+		<text></text>
+    </personen>
+	<abspann>
+		<textNext></textNext>
+		<date1></date1>
+		<date2></date2>
+		<date3></date3>
+		<date4></date4>
+		<fragen></fragen>
+	</abspann>
+</BLS>

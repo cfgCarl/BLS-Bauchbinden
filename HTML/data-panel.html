@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BLS Data Panel</title>
+</head>
+<script src="../scripts/jquery.js"></script>
+<link rel="stylesheet" href="../scripts/style-001.css">
+<link href="../Storage/blsLiveData.xml" rel="import" />
+<resource>
+<body>
+<form class="form-style-2">
+    <input id="fileinput" type="file" />
+    <eigenerTag>test</eigenerTag>
+    <br />
+    <textarea></textarea>
+    <br />
+    <div class="form-style-2-heading">Infos für Bauchbinden und Abspann</div>
+    <div class="form-style-2-info">Generell nur Vornamen angeben. Mehrere personen mit '&' verbinden.</div>
+    <br />
+    <label><span>Referent</span><input type="text" class="input-field" id="ref" value="" /></label>
+    <label><span>Moderation</span><input type="text" class="input-field" id="mod" value="" /></label>
+    <label><span>Fragen (Personen)</span><input type="text" class="input-field" id="frag" value="" /></label>
+    <label><span>Technik (Personen)</span><input type="text" class="input-field" id="tec" value="" /></label>
+    <label><span>Weitere Unterstützer</span><input type="text" class="input-field" id="zusPers" value="" /></label>
+    <label><span>Textstelle (dieses Mal)</span><input type="text" class="input-field" id="text" value="" /></label>
+    <div class="form-style-2-heading">Infos für die nächsten Bibel.Lifestreams</div>
+    <label><span>Textstelle (beim nächsten Mal)</span><input type="text" class="input-field" id="textNext" value="" /></label>
+    <label><span>Nächster Termin</span><input type="date" class="input-field" id="date1" value="" /></label>
+    <label><span>1. weiterer Termin</span><input type="date" class="input-field" id="date2" value="" /></label>
+    <label><span>2. weiterer Termin</span><input type="date" class="input-field" id="date3" value="" /></label>
+    <label><span>3. weiterer Termin</span><input type="date" class="input-field" id="date4" value="" /></label>
+    <div class="form-style-2-heading">Fragen</div>
+    <label><span>Fragen</span><textarea id="fragen" class="textarea-field"></textarea></label>
+    <input type="button" id="saveButton" value="Saave"/>
+</form>
+
+<div id="demo1"></div>
+<div id="demo2"></div>
+</body>
+<script>
+
+    startup()
+    var input = document.getElementById("fileinput");
+    var text = document.querySelector("textarea");
+    var button = document.getElementById("saveButton");
+    var name;
+    input.onchange = function(e) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            text.value = event.target.result;
+            myFunction(event.target.result);
+            button.disabled = false;
+        }
+        name = e.target.files[0].name;
+        reader.readAsText(new Blob([e.target.files[0]], {
+            "type": "application/json"
+        }));
+    }
+
+    button.onclick = function(e) {
+        //e.preventDefault();
+        /*var blob = new Blob([text.value], {
+            "type": "application/xml"
+        });
+        var a = document.createElement("a");
+        a.download = name;
+        a.href = URL.createObjectURL(blob);
+        document.body.appendChild(a);
+        a.click();
+        text.value = "";
+        input.value = "";
+        button.disabled = true;
+        document.body.removeChild(a);*/
+
+
+        const ref = document.getElementById("ref").value
+        const mod = document.getElementById("mod").value
+        const frag = document.getElementById("frag").value
+        const tec = document.getElementById("tec").value
+        const zusPers = document.getElementById("zusPers").value
+        const textx = document.getElementById("text").value
+        const textNext = document.getElementById("textNext").value
+        const date1 = document.getElementById("date1").value
+        const date2 = document.getElementById("date2").value
+        const date3 = document.getElementById("date3").value
+        const date4 = document.getElementById("date4").value
+        const fragen = document.getElementById("fragen").value
+
+
+        var x = new XMLHttpRequest()
+        var url = '/test?' + 'ref=' + encodeURIComponent(ref) + '&mod=' + encodeURIComponent(mod) + '&frag=' + encodeURIComponent(frag)
+            + '&tec=' + encodeURIComponent(tec) + '&zusPers=' + encodeURIComponent(zusPers) + '&textx=' + encodeURIComponent(textx)
+            + '&textNext=' + encodeURIComponent(textNext) + '&date1=' + encodeURIComponent(date1) + '&date2=' + encodeURIComponent(date2)
+            + '&date3=' + encodeURIComponent(date3) + '&date4=' + encodeURIComponent(date4) + '&fragen=' + encodeURIComponent(fragen);
+        x.open("GET", url, false);
+        x.send();
+
+        console.log(x.responseText)
+
+    }
+
+    function myFunction(xml) {
+        var xmlDoc = $.parseXML(xml);
+        document.getElementById("ref").value = readNode(xmlDoc, "ref");
+        document.getElementById("mod").value = readNode(xmlDoc, "mod");
+        document.getElementById("frag").value = readNode(xmlDoc, "frag");
+        document.getElementById("tec").value = readNode(xmlDoc, "tec");
+        document.getElementById("zusPers").value = readNode(xmlDoc, "zusPers");
+        document.getElementById("text").value = readNode(xmlDoc, "text");
+        document.getElementById("textNext").value = readNode(xmlDoc, "textNext");
+        document.getElementById("date1").value = readNode(xmlDoc, "date1");
+        document.getElementById("date2").value = readNode(xmlDoc, "date2");
+        document.getElementById("date3").value = readNode(xmlDoc, "date3");
+        document.getElementById("date4").value = readNode(xmlDoc, "date4");
+        document.getElementById("fragen").value = readNode(xmlDoc, "fragen");
+        //saveData(xmlDoc)
+
+
+
+    }
+
+    function readNode(xmlDoc, tagName) {
+        if(xmlDoc.getElementsByTagName(tagName)[0].childNodes[0] == undefined) {
+            return ""
+        } else {return xmlDoc.getElementsByTagName(tagName)[0].childNodes[0].nodeValue}
+    }
+
+    function startup() {
+        var x = new XMLHttpRequest()
+        var url = '/abruf';
+        x.open("GET", url, false);
+        x.send();
+        var data = JSON.parse(x.responseText);
+
+        document.getElementById("ref").value = data.Referent;
+        document.getElementById("mod").value = data.Moderation;
+        document.getElementById("frag").value = data.FragenPersonen;
+        document.getElementById("tec").value = data.TechnikPersonen;
+        document.getElementById("zusPers").value = data.ZusatzPersonen;
+        document.getElementById("text").value = data.BibelstelleAktuell;
+        document.getElementById("textNext").value = data.BibelstelleNext;
+        document.getElementById("date1").value = data.date1;
+        document.getElementById("date2").value = data.date2;
+        document.getElementById("date3").value = data.date3;
+        document.getElementById("date4").value = data.date4;
+        document.getElementById("fragen").value = data.Fragen;
+    }
+</script>
+</html>
